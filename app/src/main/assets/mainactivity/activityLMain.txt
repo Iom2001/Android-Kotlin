@@ -1,0 +1,54 @@
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.os.PersistableBundle
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        Toast.makeText(this@com.example.androidkotlin.MainActivity,"onCreate function was called...",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Toast.makeText(this@com.example.androidkotlin.MainActivity,"onStart function was called...",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Toast.makeText(this@com.example.androidkotlin.MainActivity,"onPause function was called...",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Toast.makeText(this@com.example.androidkotlin.MainActivity,"onStop function was called...",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Toast.makeText(this@com.example.androidkotlin.MainActivity,"onRestart function was called...",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Toast.makeText(this@com.example.androidkotlin.MainActivity,"onResume function was called...",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Toast.makeText(this@com.example.androidkotlin.MainActivity,"onDestroy function was called...",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        Toast.makeText(this@com.example.androidkotlin.MainActivity,"onSaveInstanceState function was called...",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        Toast.makeText(this@com.example.androidkotlin.MainActivity,"onRestoreInstanceState function was called...",Toast.LENGTH_SHORT).show()
+    }
+
+}

@@ -1,0 +1,50 @@
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+
+class Main2Activity : AppCompatActivity() {
+    lateinit var databaseHelper: DatabaseHelper
+    lateinit var btn : Button
+    lateinit var result : TextView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        databaseHelper = DatabaseHelper(this)
+        btn = findViewById(R.id.readButton)
+        result = findViewById(R.id.resultText)
+
+        btn.setOnClickListener {
+
+            readDataFunction()
+        }
+    }
+
+    private fun readDataFunction() {
+
+        val data = databaseHelper.readData()
+        val stringBuffer = StringBuffer()
+
+        if( data !=null && data.count > 0)
+        {
+            while (data.moveToNext())
+            {
+                stringBuffer.append("ID: ${data.getString(0)}\n")
+                stringBuffer.append("Name: ${data.getString(1)}\n")
+                stringBuffer.append("LastName: ${data.getString(2)}\n")
+                stringBuffer.append("Height: ${data.getString(3)}\n")
+                stringBuffer.append("Weight: ${data.getString(4)}\n\n")
+            }
+            result.text = stringBuffer.toString()
+            Toast.makeText(applicationContext,"Data Retrieved....", Toast.LENGTH_LONG).show()
+        }else{
+            Toast.makeText(applicationContext,"No Data...", Toast.LENGTH_LONG).show()
+
+        }
+
+    }
+}

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.androidkotlin">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".AndroidwithKotlin.Animation.Move"></activity>
+        <activity android:name=".AndroidwithKotlin.Wifi_Manager.WifiInfo" />
+        <activity android:name=".AndroidwithKotlin.Wifi_Manager.WifiStateChange" />
+        <activity android:name=".AndroidwithKotlin.Fragment.Fragment_LifeCycle_Package.FrameLayout" />
+        <activity android:name=".AndroidwithKotlin.Fragment.Fragment_LifeCycle_Package.Fragment_LifeCycle" />
+        <activity android:name=".AndroidwithKotlin.Activity.Activity_Lifecycle" />
+        <activity android:name=".AndroidwithKotlin.ExplicitIntent.Start_Activity.Message_Activity" />
+        <activity android:name=".AndroidwithKotlin.ExplicitIntent.Start_Activity.Start_Activity" />
+        <activity android:name=".AndroidwithKotlin.ExplicitIntent.Splash.DemoMain" />
+        <activity android:name=".AndroidwithKotlin.ExplicitIntent.Splash.Simple_Splash" />
+        <activity android:name=".AndroidwithKotlin.ExplicitIntent.Activity_Passing_Data.Display" />
+        <activity android:name=".AndroidwithKotlin.ExplicitIntent.Activity_Passing_Data.Passing_Data" />
+        <activity android:name=".AndroidwithKotlin.ExplicitIntent.Activity_Transition.Activity_Transition2" />
+        <activity android:name=".AndroidwithKotlin.ExplicitIntent.Activity_Transition.Activity_Transition1" />
+        <activity android:name=".AndroidwithKotlin.ImplicitIntent.OpenGalleryA" />
+        <activity android:name=".AndroidwithKotlin.ImplicitIntent.CaptureVideoA" />
+        <activity android:name=".AndroidwithKotlin.ImplicitIntent.PhoneCallA" />
+        <activity android:name=".AndroidwithKotlin.ImplicitIntent.EmailA" />
+        <activity android:name=".AndroidwithKotlin.ImplicitIntent.Camera" />
+        <activity android:name=".AndroidwithKotlin.ImplicitIntent.Maps" />
+        <activity android:name=".AndroidwithKotlin.Menu.ContextMenuA" />
+        <activity android:name=".AndroidwithKotlin.Menu.OptionMenu" />
+        <activity android:name=".AndroidwithKotlin.Menu.PopUpMenuA" />
+        <activity android:name=".AndroidwithKotlin.Container.ExpandableListViewA" />
+        <activity android:name=".AndroidwithKotlin.Container.SearchVeiwToolBarA" />
+        <activity android:name=".AndroidwithKotlin.Container.WebViewA" />
+        <activity android:name=".AndroidwithKotlin.Container.CustomListViewA" />
+        <activity android:name=".AndroidwithKotlin.Container.SearchViewA" />
+        <activity android:name=".AndroidwithKotlin.Container.GridViewA" />
+        <activity android:name=".AndroidwithKotlin.Container.ListViewA" />
+        <activity android:name=".AndroidwithKotlin.Time.Chronometer" />
+        <activity android:name=".AndroidwithKotlin.Time.TimePickerA" />
+        <activity android:name=".AndroidwithKotlin.Time.TextClockA" />
+        <activity android:name=".AndroidwithKotlin.Date.CustomTitleDatePickerA" />
+        <activity android:name=".AndroidwithKotlin.Date.DatePicker" />
+        <activity android:name=".AndroidwithKotlin.Image.SimplePointA" />
+        <activity android:name=".AndroidwithKotlin.Image.ImageSliderA" />
+        <activity android:name=".AndroidwithKotlin.Image.ImageSwitcher" />
+        <activity android:name=".AndroidwithKotlin.Image.ImageEffects" />
+        <activity android:name=".AndroidwithKotlin.Image.ImageViewA" />
+        <activity android:name=".AndroidwithKotlin.Image.ImageButtonA" />
+        <activity android:name=".AndroidwithKotlin.AlertDialog.CustomAlertDialogA" />
+        <activity android:name=".AndroidwithKotlin.AlertDialog.MultipleChoiceListA" />
+        <activity android:name=".AndroidwithKotlin.AlertDialog.SingleChoiceListA" />
+        <activity android:name=".AndroidwithKotlin.AlertDialog.TranditionalSingleChoiceA" />
+        <activity android:name=".AndroidwithKotlin.AlertDialog.SimpleAlertDialogA" />
+        <activity android:name=".AndroidwithKotlin.Toast.ColoredToast" />
+        <activity android:name=".AndroidwithKotlin.Toast.PositioningToastA" />
+        <activity android:name=".AndroidwithKotlin.Toast.CustomToast" />
+        <activity android:name=".AndroidwithKotlin.Toast.SimpleToast" />
+        <activity android:name=".AndroidwithKotlin.Widgets.ViewTAg" />
+        <activity android:name=".AndroidwithKotlin.Widgets.ScrollView" />
+        <activity android:name=".AndroidwithKotlin.Widgets.CustomCheckbox" />
+        <activity android:name=".AndroidwithKotlin.Widgets.ToggleButton" />
+        <activity android:name=".AndroidwithKotlin.Widgets.CheckedTextView" />
+        <activity android:name=".AndroidwithKotlin.Widgets.TextSwitcher" />
+        <activity android:name=".AndroidwithKotlin.Widgets.MultiAutoCompleteTextView" />
+        <activity android:name=".AndroidwithKotlin.Widgets.AutoCompleteTextView" />
+        <activity android:name=".AndroidwithKotlin.Widgets.ProgressBar" />
+        <activity android:name=".AndroidwithKotlin.Widgets.ProgressDialog" />
+        <activity android:name=".AndroidwithKotlin.Widgets.Switch" />
+        <activity android:name=".AndroidwithKotlin.Widgets.Spinner" />
+        <activity android:name=".AndroidwithKotlin.Widgets.RatingBar" />
+        <activity android:name=".AndroidwithKotlin.Widgets.CheckBox" />
+        <activity android:name=".AndroidwithKotlin.Widgets.RadioButton" />
+        <activity android:name=".AndroidwithKotlin.Widgets.ButtonA" />
+        <activity android:name=".AndroidwithKotlin.Widgets.EditText" />
+        <activity android:name=".AndroidwithKotlin.Widgets.TextView" />
+        <activity android:name=".FirstActivity" />
+        <activity android:name=".ReadtxtActivity" />
+        <activity android:name=".CodeActivity" />
+        <activity android:name=".SecondActivity" />
+        <activity
+            android:name=".SplashActivity"
+         >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+    </application>
+
+</manifest>

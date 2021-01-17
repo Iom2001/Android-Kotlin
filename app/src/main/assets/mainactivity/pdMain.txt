@@ -1,0 +1,128 @@
+
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.pm.PackageManager
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
+import android.telephony.TelephonyManager
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import java.util.jar.Manifest
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    private val READ_PERMISSION_CODE = 1
+    lateinit var btnDetail : Button
+    lateinit var txtDetail : TextView
+    lateinit var information : String
+    lateinit var phoneTypeString: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        btnDetail = findViewById(R.id.buttonGetDetail)
+        txtDetail = findViewById(R.id.phoneDetailText)
+
+        btnDetail.setOnClickListener {
+
+            checkPermission()
+
+        }
+
+
+    }
+
+    private fun checkPermission() {
+
+        val checkPermission = ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_PHONE_STATE)
+
+        if(checkPermission == PackageManager.PERMISSION_GRANTED)
+        {
+            telephoneManagerDetails()
+        }
+        else
+        {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_PHONE_STATE), READ_PERMISSION_CODE )
+        }
+
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when(requestCode) {
+            READ_PERMISSION_CODE -> {
+
+                if(grantResults.size >=0 && grantResults[0]==PackageManager.PERMISSION_GRANTED)
+                {
+                    telephoneManagerDetails()
+                }
+                else
+                {
+                    Toast.makeText(applicationContext,"You don't have permission",Toast.LENGTH_SHORT).show()
+                }
+
+            }
+        }
+
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun telephoneManagerDetails() {
+
+        val telephonyManager  = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val typeOfPhone = telephonyManager.phoneType
+
+        when(typeOfPhone)
+        {
+            TelephonyManager.PHONE_TYPE_GSM -> {
+
+                phoneTypeString = "GSM"
+
+            }
+
+            TelephonyManager.PHONE_TYPE_CDMA -> {
+
+                phoneTypeString = "CDMA"
+
+            }
+
+            TelephonyManager.PHONE_TYPE_NONE -> {
+
+                phoneTypeString = "NONE"
+
+            }
+        }
+
+        val roaming  = telephonyManager.isNetworkRoaming
+        val phoneType = phoneTypeString
+        val voiceMailNo = telephonyManager.voiceMailNumber
+        val IMEINumber = telephonyManager.deviceId
+        val simCountryISO = telephonyManager.simCountryIso
+        val networkCountryISO = telephonyManager.networkCountryIso
+        val deviceSoftwareVersion = telephonyManager.deviceSoftwareVersion
+        val subscriberId = telephonyManager.subscriberId
+        val simSerialNumber = telephonyManager.simSerialNumber
+
+        information = "Phone Details :- \n\n" +
+                "Phone Network Type : $phoneType\n" +
+                "IMEI Number : $IMEINumber\n" +
+                "SIM Country ISO : $simCountryISO\n" +
+                "Network Country ISO : $networkCountryISO\n" +
+                "Voice Mail Number : $voiceMailNo\n" +
+                "Roaming : $roaming\n" +
+                "Subscriber ID : $subscriberId\n" +
+                "SIM Serial Number : $simSerialNumber\n" +
+                "Device Software Version : $deviceSoftwareVersion\n"
+
+
+        txtDetail.text = information
+
+    }
+
+}

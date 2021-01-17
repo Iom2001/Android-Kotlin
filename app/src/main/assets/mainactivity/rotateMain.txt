@@ -1,0 +1,36 @@
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.Button
+import android.widget.ImageView
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val btnClockWise = findViewById<Button>(R.id.clockWise) as Button
+        val btnAntiClockWise = findViewById<Button>(R.id.antiClockWise) as Button
+
+        btnClockWise.setOnClickListener {
+
+            val image = findViewById<ImageView>(R.id.imageView) as ImageView
+
+            val animation : Animation = AnimationUtils.loadAnimation(this@com.example.androidkotlin.MainActivity,R.anim.clockwise)
+
+            image.startAnimation(animation)
+        }
+
+        btnAntiClockWise.setOnClickListener {
+
+            val image = findViewById<ImageView>(R.id.imageView) as ImageView
+
+            val animation : Animation = AnimationUtils.loadAnimation(this@com.example.androidkotlin.MainActivity,R.anim.anticlock)
+
+            image.startAnimation(animation)
+        }
+
+    }
+}

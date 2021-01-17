@@ -1,0 +1,20 @@
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.ImageView
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val img = findViewById<ImageView>(R.id.imageView) as ImageView
+
+        img.setOnClickListener {
+
+            Toast.makeText(this@com.example.androidkotlin.MainActivity,"ImageView was clicked !", Toast.LENGTH_SHORT).show()
+
+        }
+    }
+}

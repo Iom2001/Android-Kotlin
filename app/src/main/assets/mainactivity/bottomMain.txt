@@ -1,0 +1,31 @@
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+
+        val bottomNavigationView : BottomNavigationView = findViewById(R.id.bottomNavigation)
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener {
+
+            when(it.itemId)
+            {
+                R.id.back -> Toast.makeText(applicationContext,"Back Button Selected..",Toast.LENGTH_LONG).show()
+
+                R.id.app -> Toast.makeText(applicationContext,"App Button Selected..",Toast.LENGTH_LONG).show()
+
+                R.id.next -> Toast.makeText(applicationContext,"Next Button Selected..",Toast.LENGTH_LONG).show()
+
+            }
+            return@OnNavigationItemSelectedListener true
+        })
+
+    }
+}

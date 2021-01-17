@@ -1,0 +1,45 @@
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.Button
+import android.widget.ImageView
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val btnTop = findViewById<Button>(R.id.top) as Button
+        val btnBottom = findViewById<Button>(R.id.bottom) as Button
+        val btnLeft = findViewById<Button>(R.id.left) as Button
+        val btnRight = findViewById<Button>(R.id.right) as Button
+
+        btnTop.setOnClickListener {
+            val image = findViewById<ImageView>(R.id.imageView) as ImageView
+            val animation : Animation = AnimationUtils.loadAnimation(this@com.example.androidkotlin.MainActivity,R.anim.up)
+            image.startAnimation(animation)
+        }
+
+        btnBottom.setOnClickListener {
+            val image = findViewById<ImageView>(R.id.imageView) as ImageView
+            val animation : Animation = AnimationUtils.loadAnimation(this@com.example.androidkotlin.MainActivity,R.anim.down)
+            image.startAnimation(animation)
+        }
+
+        btnLeft.setOnClickListener {
+            val image = findViewById<ImageView>(R.id.imageView) as ImageView
+            val animation : Animation = AnimationUtils.loadAnimation(this@com.example.androidkotlin.MainActivity,R.anim.left)
+            image.startAnimation(animation)
+        }
+
+        btnRight.setOnClickListener {
+            val image = findViewById<ImageView>(R.id.imageView) as ImageView
+            val animation : Animation = AnimationUtils.loadAnimation(this@com.example.androidkotlin.MainActivity,R.anim.right)
+            image.startAnimation(animation)
+        }
+
+
+    }
+}

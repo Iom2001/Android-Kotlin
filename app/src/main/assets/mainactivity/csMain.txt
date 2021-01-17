@@ -1,0 +1,101 @@
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import java.io.*
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    lateinit var fileText : EditText
+    lateinit var btnSave : Button
+    lateinit var btnRead : Button
+
+    val file_name = "testFile"
+    var strData : String = ""
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        fileText = findViewById(R.id.fileEditText)
+        btnSave = findViewById(R.id.saveButton)
+        btnRead = findViewById(R.id.retrieveButton)
+
+        btnSave.setOnClickListener {
+
+            saveFile()
+
+        }
+
+        btnRead.setOnClickListener {
+
+            readFile()
+        }
+
+    }
+
+    private fun saveFile() {
+
+        try{
+
+            val fileSave = File(cacheDir,file_name)
+
+            val fileOutputStream = FileOutputStream(fileSave)
+
+            strData = fileText.text.toString()
+
+            fileOutputStream.write(strData.toByteArray())
+
+            fileOutputStream.close()
+
+            Toast.makeText(applicationContext,"Data Saved...",Toast.LENGTH_SHORT).show()
+
+            fileText.setText("")
+
+        }catch (exp : java.io.IOException)
+        {
+            exp.printStackTrace()
+        }
+
+
+    }
+
+    private fun readFile() {
+
+        try {
+
+            val fileRead = File(cacheDir,file_name)
+
+            val fileInputStream = FileInputStream(fileRead)
+
+            val inputStreamReader = InputStreamReader(fileInputStream)
+
+            val bufferedReader = BufferedReader(inputStreamReader)
+
+            val stringBuilder = StringBuilder()
+
+            var line : String? = null
+
+            while ({line =bufferedReader.readLine(); line}()!=null)
+            {
+                stringBuilder.append(line)
+            }
+
+            fileInputStream.close()
+
+            fileText.setText(stringBuilder.toString())
+
+            Toast.makeText(applicationContext,"Data Retrieved...",Toast.LENGTH_SHORT).show()
+
+
+        }catch(exp  : java.io.IOException)
+        {
+            exp.printStackTrace()
+        }
+
+
+    }
+}

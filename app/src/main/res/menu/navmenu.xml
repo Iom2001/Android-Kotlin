@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/quiz"
+        android:icon="@drawable/quiz"
+        android:title="Quiz" />
+    <item
+        android:id="@+id/feedback"
+        android:icon="@drawable/feed"
+        android:title="FeedBack" />
+
+    <item
+        android:id="@+id/rate"
+        android:icon="@drawable/rate"
+        android:title="Rate Us" />
+
+    <item android:title="Comunicate">
+        <menu>
+            <item
+                android:id="@+id/share"
+                android:icon="@drawable/share"
+                android:title="Share" />
+        </menu>
+    </item>
+
+    <item android:title="About">
+        <menu>
+            <item
+                android:icon="@drawable/about"
+                android:title="About Us" />
+            <item
+                android:icon="@drawable/more"
+                android:title="More Apps" />
+        </menu>
+    </item>
+</menu>

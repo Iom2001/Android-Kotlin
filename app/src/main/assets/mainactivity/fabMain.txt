@@ -1,0 +1,29 @@
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.support.design.widget.CoordinatorLayout
+import android.support.design.widget.FloatingActionButton
+import android.support.design.widget.Snackbar
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    private lateinit var coordinatorLayout: CoordinatorLayout
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        coordinatorLayout = findViewById(R.id.coordinatorContainer)
+
+        val BtnFab : FloatingActionButton = findViewById(R.id.fabButton)
+
+        BtnFab.setOnClickListener {
+
+            Snackbar.make(coordinatorLayout,"Floating Action Button Clicked",Snackbar.LENGTH_LONG ).show()
+
+        }
+
+
+    }
+}

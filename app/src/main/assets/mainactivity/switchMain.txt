@@ -1,0 +1,21 @@
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Switch
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val swt = findViewById<Switch>(R.id.switchId) as Switch
+
+        swt.setOnClickListener {
+            if (swt.isChecked)
+                Toast.makeText(this@com.example.androidkotlin.MainActivity,"Switch ON",Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(this@com.example.androidkotlin.MainActivity,"Switch OFF",Toast.LENGTH_SHORT).show()
+        }
+    }
+}

@@ -1,0 +1,76 @@
+
+
+class BigTextNotification : AppCompatActivity() {
+
+    var  CHANNEL_ID_ANDROID = "com.darshankomu.kotlinforandroidexamples.ANDROID"
+    var CHANNEL_NAME = "ANDROID_CHANNEL"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_big_text_notification)
+
+        val toolbar =  findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setTitle(R.string.app_name)
+
+        val btnNotification = findViewById<Button>(R.id.button)
+
+        btnNotification.setOnClickListener {
+
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                val imp = NotificationManager.IMPORTANCE_HIGH
+
+                val mNotificationChannel = NotificationChannel(CHANNEL_ID_ANDROID, CHANNEL_NAME, imp)
+
+                val ic = BitmapFactory.decodeResource(resources, R.drawable.kotlin)
+
+                val bigTextNotification: Notification.BigTextStyle = Notification.BigTextStyle()
+
+                bigTextNotification.bigText("This demo of BigTextStyle Notification this text notification has to be long in order to see the full effects of BigTextStyle Notification, It has three section under notification content title which is 'Big Text Notification', then actual place for big text below content title and at last summary text which shows the author of the text ")
+
+                bigTextNotification.setBigContentTitle("Big Text Notification.....")
+
+                bigTextNotification.setSummaryText("By : Darshan")
+
+                val notificationBuilder: Notification.Builder = Notification.Builder(this, CHANNEL_ID_ANDROID)
+                        .setContentText("Big Text Notification.....")
+                        .setSmallIcon(R.drawable.kotlin)
+                        .setLargeIcon(ic)
+                        .setStyle(bigTextNotification)
+                        .setContentText("This is Big Text Notification.....")
+
+                val notificationManager: NotificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+                notificationManager.createNotificationChannel(mNotificationChannel)
+
+                notificationManager.notify(0, notificationBuilder.build())
+            }
+            else
+            {
+                val ic = BitmapFactory.decodeResource(resources,R.drawable.kotlin)
+
+                val bigTextNotification : NotificationCompat.BigTextStyle = NotificationCompat.BigTextStyle()
+
+                bigTextNotification.bigText("This demo of BigTextStyle Notification this text notification has to be long in order to see the full effects of BigTextStyle Notification, It has three section under notification content title which is 'Big Text Notification', then actual place for big text below content title and at last summary text which shows the author of the text ")
+
+                bigTextNotification.setBigContentTitle("Big Text Notification.....")
+
+                bigTextNotification.setSummaryText("By : Darshan")
+
+                val notificationBuilder : NotificationCompat.Builder = NotificationCompat.Builder(this)
+                        .setContentText("Big Text Notification.....")
+                        .setSmallIcon(R.drawable.kotlin)
+                        .setLargeIcon(ic)
+                        .setStyle(bigTextNotification)
+                        .setContentText("This is Big Text Notification.....")
+
+                val notificationManager  = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+                notificationManager.notify(0,notificationBuilder.build())
+            }
+        }
+
+    }
+}

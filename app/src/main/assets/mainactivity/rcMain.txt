@@ -1,0 +1,98 @@
+
+import android.content.pm.PackageManager
+import android.database.Cursor
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.provider.ContactsContract
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ListView
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    private val READ_CONTACTS_PERMISSION_CODE = 1
+    lateinit var contacts : ArrayList<String>
+    lateinit var btnReadContacts : Button
+    lateinit var phoneContactsList : ListView
+    lateinit var cursor : Cursor
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        btnReadContacts = findViewById(R.id.readContactsButton)
+
+        phoneContactsList = findViewById(R.id.contactList)
+
+        btnReadContacts.setOnClickListener {
+
+            checkPermission()
+
+        }
+
+    }
+
+    private fun checkPermission() {
+
+        val checkPermission = ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_CONTACTS)
+
+        if(checkPermission == PackageManager.PERMISSION_GRANTED)
+        {
+            phoneContactsDetails()
+        }
+        else
+        {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_CONTACTS), READ_CONTACTS_PERMISSION_CODE )
+        }
+
+
+    }
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when(requestCode) {
+            READ_CONTACTS_PERMISSION_CODE -> {
+
+                if(grantResults.size >=0 && grantResults[0]== PackageManager.PERMISSION_GRANTED)
+                {
+                    phoneContactsDetails()
+                }
+                else
+                {
+                    Toast.makeText(applicationContext,"You don't have permission", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+        }
+
+    }
+
+
+
+
+    private fun phoneContactsDetails() {
+
+        cursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,null,null,ContactsContract.Contacts.DISPLAY_NAME + " ASC ")
+
+        contacts = ArrayList()
+
+        while (cursor.moveToNext())
+        {
+            val contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
+            val phoneNumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+            contacts.add("Name : $contactName \nPhoneNo : $phoneNumber")
+        }
+
+        cursor.close()
+
+
+        val ContactsAdapter = ArrayAdapter<String>(this@com.example.androidkotlin.MainActivity,android.R.layout.simple_list_item_1,contacts)
+
+        phoneContactsList.adapter = ContactsAdapter
+    }
+}

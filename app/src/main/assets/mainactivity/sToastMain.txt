@@ -1,0 +1,28 @@
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val btnS = findViewById<Button>(R.id.button) as Button
+        val btnL = findViewById<Button>(R.id.button1) as Button
+
+
+        btnS.setOnClickListener {
+
+            Toast.makeText(this@com.example.androidkotlin.MainActivity, " This is Short Toast Message ", Toast.LENGTH_SHORT).show()
+
+        }
+
+        btnL.setOnClickListener {
+
+            Toast.makeText(this@com.example.androidkotlin.MainActivity, " This is Long Toast Message ", Toast.LENGTH_LONG).show()
+
+        }
+    }
+}

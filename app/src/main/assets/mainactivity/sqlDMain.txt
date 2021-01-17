@@ -1,0 +1,41 @@
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+
+class Delete : AppCompatActivity() {
+
+    lateinit var databaseHelper: DatabaseHelper
+    lateinit var btn : Button
+    lateinit var id : EditText
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        databaseHelper = DatabaseHelper(this)
+        btn = findViewById(R.id.deleteButton)
+        id = findViewById(R.id.EdtID)
+
+        btn.setOnClickListener {
+
+            deleteDataFunction()
+        }
+
+    }
+
+    private fun deleteDataFunction() {
+
+        val strId = id.text.toString()
+        val result : Boolean = databaseHelper.deleteData(strId)
+
+        when {
+            result -> Toast.makeText(applicationContext, "Data Deleted Successfully...", Toast.LENGTH_LONG).show()
+            else -> Toast.makeText(applicationContext, "Failed to delete data...", Toast.LENGTH_LONG).show()
+        }
+
+    }
+}

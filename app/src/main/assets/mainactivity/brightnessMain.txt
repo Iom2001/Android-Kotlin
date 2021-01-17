@@ -1,0 +1,43 @@
+mport androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.SeekBar
+import android.widget.TextView
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    var mBrightnessLevel = 0.5f
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val seekBar = findViewById<SeekBar>(R.id.brightnessControl)
+
+        val brightnessText = findViewById<TextView>(R.id.brightnessControlText)
+
+        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+
+            override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
+
+                mBrightnessLevel = progress / 100f
+
+                brightnessText.text = mBrightnessLevel.toString()
+
+                val layoutParams = window.attributes
+
+                layoutParams.screenBrightness = mBrightnessLevel
+
+                window.attributes = layoutParams
+
+
+            }
+
+            override fun onStartTrackingTouch(seekbar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekbar: SeekBar?) {
+            }
+
+        })
+    }
+}

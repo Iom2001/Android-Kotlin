@@ -1,0 +1,42 @@
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import androidx.fragment.app.Fragment
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    lateinit var mBtnOne : Button
+    lateinit var mBtnTwo : Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        mBtnOne = findViewById(R.id.ButtonOne)
+        mBtnTwo = findViewById(R.id.ButtonTwo)
+
+        mBtnOne.setOnClickListener {
+
+            val fragmentOne = FragmentOne()
+            loadFragment(fragmentOne)
+
+        }
+
+        mBtnTwo.setOnClickListener {
+
+            val fragmentTwo = FragmentTwo()
+            loadFragment(fragmentTwo)
+
+        }
+
+
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        val fragmentManager =  supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentView,fragment)
+        fragmentTransaction.commit()
+    }
+}

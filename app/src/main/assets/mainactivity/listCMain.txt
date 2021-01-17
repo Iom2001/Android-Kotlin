@@ -1,0 +1,38 @@
+import android.content.Intent
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.AdapterView
+import android.widget.ListAdapter
+import android.widget.ListView
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val listView = findViewById<ListView>(R.id.listView)
+
+        val custom_list_data = ArrayList<CList>()
+
+        val custom_list = CListAdapter(this,custom_list_data)
+
+        custom_list_data.add(CList( R.drawable.date,"Date","This is custom date"))
+        custom_list_data.add(CList( R.drawable.calc,"Calculator","This is custom calculator"))
+        custom_list_data.add(CList( R.drawable.banim,"Animation","This is custom animation"))
+        custom_list_data.add(CList( R.drawable.im_intent,"Implicit Intent","This is custom Implicit intent"))
+        custom_list_data.add(CList( R.drawable.ex_intent,"Explicit Intent","This is Explicit Intent"))
+        custom_list_data.add(CList( R.drawable.time,"Time","This is custom Time"))
+        custom_list_data.add(CList( R.drawable.widgets,"Widgets","This is custom Widgets"))
+
+        listView.adapter = custom_list
+
+        listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+
+            Toast.makeText(this@com.example.androidkotlin.MainActivity, " Item Clicked:- $id", Toast.LENGTH_SHORT).show()
+
+        }
+
+    }
+}

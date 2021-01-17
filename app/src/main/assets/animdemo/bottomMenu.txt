@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+       android:id="@+id/back"
+        android:icon="@drawable/ic_action_back"
+        android:title="Back"
+        />
+
+    <item
+        android:id="@+id/app"
+        android:icon="@drawable/ic_action_app"
+        android:title="App"
+        />
+
+    <item
+        android:id="@+id/next"
+        android:icon="@drawable/ic_action_forward"
+        android:title="Next"
+        />
+</menu>

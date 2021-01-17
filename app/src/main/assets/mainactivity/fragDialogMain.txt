@@ -1,0 +1,33 @@
+import android.content.DialogInterface
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.support.v7.app.AlertDialog
+import android.widget.Button
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val btn = findViewById<Button>(R.id.button) as Button
+
+        btn.setOnClickListener {
+            val builder : AlertDialog.Builder = AlertDialog.Builder(this@com.example.androidkotlin.MainActivity)
+            builder.setCancelable(false)
+            builder.setTitle("Dialog Box")
+            builder.setMessage("Do you want to exit..")
+            builder.setPositiveButton("OK!!", { dialog, which ->
+                Toast.makeText(this@com.example.androidkotlin.MainActivity,"OK button was clicked",Toast.LENGTH_SHORT).show()
+                finish()
+            }).setNegativeButton("Cancel", {dialog, which ->
+                Toast.makeText(this@com.example.androidkotlin.MainActivity,"Cancel button was clicked",Toast.LENGTH_SHORT).show()
+                finish()
+            })
+            builder.create().show()
+        }
+    }
+
+
+}

@@ -1,0 +1,48 @@
+
+class SimpleNotification : AppCompatActivity() {
+
+    var  CHANNEL_ID_ANDROID = "com.darshankomu.kotlinforandroidexamples.ANDROID"
+    var CHANNEL_NAME = "ANDROID_CHANNEL"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_simple_notification)
+
+        val toolbar =  findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setTitle(R.string.app_name)
+
+        val NotificationButton = findViewById<Button>(R.id.button)
+
+        NotificationButton.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            {
+                val imp = NotificationManager.IMPORTANCE_HIGH
+                val mNotificationChannel = NotificationChannel(CHANNEL_ID_ANDROID,CHANNEL_NAME,imp)
+                val notificationBuilder : Notification.Builder = Notification.Builder(this@SimpleNotification,CHANNEL_ID_ANDROID)
+                        .setSmallIcon(R.drawable.kotlin)
+                        .setContentTitle("Simple Notification...")
+                        .setContentText("This is Simple Notification example!!.....")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+                val notificationManager : NotificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.createNotificationChannel(mNotificationChannel)
+                notificationManager.notify(0,notificationBuilder.build())
+            }
+            else
+            {
+
+                val notificationBuilder2 : NotificationCompat.Builder = NotificationCompat.Builder(this)
+                            .setSmallIcon(R.drawable.kotlin)
+                            .setContentTitle("Simple Notification...")
+                            .setContentText("This is Simple Notification example!!.....")
+
+                val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.notify(0,notificationBuilder2.build())
+            }
+
+
+        }
+
+    }
+}

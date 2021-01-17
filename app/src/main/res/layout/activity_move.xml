@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AndroidwithKotlin.Animation.Move">
+
+    <Button
+        android:id="@+id/top_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_Button"
+        android:layout_alignStart="@id/bottom_Button"
+        android:layout_alignLeft="@id/bottom_Button"
+        android:text="Top"
+        android:textSize="17sp" />
+
+    <Button
+        android:id="@+id/bottom_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Bottom"
+        android:textSize="17sp" />
+
+    <ImageView
+        android:id="@+id/image_View1"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/kotlin" />
+
+    <Button
+        android:id="@+id/left_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Left"
+        android:textSize="17sp" />
+
+    <Button
+        android:id="@+id/right_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="Right"
+        android:textSize="17sp" />
+
+</RelativeLayout>

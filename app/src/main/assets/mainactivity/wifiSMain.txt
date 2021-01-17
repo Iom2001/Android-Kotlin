@@ -1,0 +1,30 @@
+import android.content.Context
+import android.net.wifi.WifiManager
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val btnWifiOn = findViewById<Button>(R.id.wifiOn) as Button
+        val btnWifiOff = findViewById<Button>(R.id.wifiOff) as Button
+
+        btnWifiOn.setOnClickListener {
+            val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+            wifiManager.setWifiEnabled(true)
+            Toast.makeText(this@com.example.androidkotlin.MainActivity,"Wifi On",Toast.LENGTH_SHORT).show()
+        }
+
+        btnWifiOff.setOnClickListener {
+            val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+            wifiManager.setWifiEnabled(false)
+            Toast.makeText(this@com.example.androidkotlin.MainActivity,"Wifi Off",Toast.LENGTH_SHORT).show()
+        }
+
+    }
+}

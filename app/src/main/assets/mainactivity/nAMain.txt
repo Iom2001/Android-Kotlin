@@ -1,0 +1,62 @@
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.media.RingtoneManager
+import android.net.Uri
+import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import androidx.core.app.NotificationCompat
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    lateinit var mActionStyleBtn : Button
+    val NOTIFICATION_ID = 4
+    val channelId = "NOTIFICATION_CHANNEL_ID"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+
+        mActionStyleBtn = findViewById(R.id.NotificationActionBtn)
+
+        mActionStyleBtn.setOnClickListener {
+
+            val builder = NotificationCompat.Builder(this@com.example.androidkotlin.MainActivity,channelId)
+            builder.setSmallIcon(R.drawable.abc_ic_commit_search_api_mtrl_alpha)
+                .setContentTitle("Action Buttons")
+                .setAutoCancel(true)
+                .setStyle(NotificationCompat.BigTextStyle().bigText("Click to visit Google"))
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+
+            val intent = Intent(Intent.ACTION_VIEW,Uri.parse("https://www.google.com"))
+            val pendingIntent = PendingIntent.getActivity(this@com.example.androidkotlin.MainActivity,0,intent,0)
+            builder.addAction(android.R.drawable.ic_menu_view,"VIEW",pendingIntent)
+            val path = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            builder.setSound(path)
+
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            {
+                val channel = NotificationChannel(channelId,"Title", NotificationManager.IMPORTANCE_DEFAULT)
+                notificationManager.createNotificationChannel(channel)
+                builder.setChannelId(channelId)
+            }
+
+            notificationManager.notify(NOTIFICATION_ID,builder.build())
+
+
+        }
+
+
+
+
+
+    }
+}

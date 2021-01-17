@@ -1,0 +1,58 @@
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.view.ContextMenu
+import android.view.MenuItem
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val listColor = findViewById<ListView>(R.id.list) as ListView
+
+        val color = arrayOf("Red","Blue","Green","Black","Orange","Magenta","White","Violet","Yellow")
+
+        val colorAdap : ArrayAdapter<String> = ArrayAdapter(this@com.example.androidkotlin.MainActivity,android.R.layout.simple_list_item_1,color)
+
+        listColor.adapter = colorAdap
+
+        registerForContextMenu(listColor)
+    }
+
+    override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        menu!!.setHeaderTitle("Select below option")
+
+        menu.add(0,v!!.id,0,"Item 1")
+        menu.add(0,v.id,0,"Item 2")
+        menu.add(0,v.id,0,"Item 3")
+        menu.add(0,v.id,0,"Item 4")
+
+    }
+
+    override fun onContextItemSelected(item: MenuItem?): Boolean {
+        if (item!!.title == "Item 1")
+        {
+            Toast.makeText(this@com.example.androidkotlin.MainActivity,"Item 1 was selected",Toast.LENGTH_SHORT).show()
+        }
+        else if (item.title == "Item 2")
+        {
+            Toast.makeText(this@com.example.androidkotlin.MainActivity,"Item 2 was selected",Toast.LENGTH_SHORT).show()
+        }
+        else if (item.title == "Item 3")
+        {
+            Toast.makeText(this@com.example.androidkotlin.MainActivity,"Item 3 was selected",Toast.LENGTH_SHORT).show()
+        }
+        else
+        {
+            Toast.makeText(this@com.example.androidkotlin.MainActivity,"Item 4 was selected",Toast.LENGTH_SHORT).show()
+        }
+        return true
+    }
+}

@@ -1,0 +1,43 @@
+
+
+class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+
+    override fun onCreate(db: SQLiteDatabase?) {
+
+        val personTable = "CREATE TABLE " +
+                TABLE_NAME + " ( " +
+                BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                NAME_COLUMN + " TEXT, " +
+                LASTNAME_COLUMN + " TEXT, " +
+                HEIGHT_COLUMN + " TEXT, " +
+                WEIGHT_COLUMN + " TEXT " + " ) "
+
+        db!!.execSQL(personTable)
+
+    }
+
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+
+        db!!.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
+
+    }
+
+   // SQL Read Data Function
+
+    fun readData () : Cursor
+    {
+        val db : SQLiteDatabase = this.writableDatabase
+        val read : Cursor = db.rawQuery("SELECT * FROM $TABLE_NAME",null)
+        return read
+    }
+
+
+
+
+    companion object {
+
+        private const val DATABASE_NAME = "Person.db"
+        private const val DATABASE_VERSION = 1
+
+    }
+}

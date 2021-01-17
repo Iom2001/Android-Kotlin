@@ -1,0 +1,63 @@
+
+
+class BigPictureNotification : AppCompatActivity() {
+
+    var  CHANNEL_ID_ANDROID = "com.darshankomu.kotlinforandroidexamples.ANDROID"
+    var CHANNEL_NAME = "ANDROID_CHANNEL"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_big_picture_notification)
+
+        val toolbar =  findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setTitle(R.string.app_name)
+
+
+        val picNotification = findViewById<Button>(R.id.pictureNotification)
+
+        picNotification.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                var notificationBuilder : Notification.Builder? = null
+
+                val imp = NotificationManager.IMPORTANCE_HIGH
+                val mNotificationChannel = NotificationChannel(CHANNEL_ID_ANDROID, CHANNEL_NAME, imp)
+                val bitmap = BitmapFactory.decodeResource(resources,R.drawable.navback)
+                val intent = Intent(this,BigPictureNotification::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                val pendingIntent = PendingIntent.getActivity(this, Calendar.getInstance().timeInMillis.toInt(),intent,0)
+                notificationBuilder = Notification.Builder(this,CHANNEL_ID_ANDROID)
+                        .setContentTitle("Big Picture Notification..")
+                        .setContentText("This is Big Picture Style Notification....")
+                        .setSmallIcon(R.drawable.kotlin)
+                        .setStyle(Notification.BigPictureStyle(notificationBuilder).bigPicture(bitmap))
+                        .addAction(R.drawable.feed,"Show Activity", pendingIntent)
+                val notificationManger = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManger.createNotificationChannel(mNotificationChannel)
+                notificationManger.notify(0,notificationBuilder.build())
+
+            }
+            else
+            {
+                val bitmap = BitmapFactory.decodeResource(resources,R.drawable.navback)
+                val bigPicNotification : NotificationCompat.BigPictureStyle = NotificationCompat.BigPictureStyle()
+                bigPicNotification.bigPicture(bitmap).build()
+                val notificationManger = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                val intent = Intent(this,BigPictureNotification::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                val pendingIntent = PendingIntent.getActivity(this, Calendar.getInstance().timeInMillis.toInt(),intent,0)
+                val notificationBuilder = NotificationCompat.Builder(this)
+                        .setContentTitle("Big Picture Notification..")
+                        .setContentText("This is Big Picture Style Notification....")
+                        .setSmallIcon(R.drawable.kotlin)
+                        .setStyle(bigPicNotification)
+                        .addAction(R.drawable.feed,"Show Activity", pendingIntent)
+                notificationManger.notify(0,notificationBuilder.build())
+
+            }
+
+        }
+
+    }
+}

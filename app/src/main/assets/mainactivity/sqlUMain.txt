@@ -1,0 +1,53 @@
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+
+class Update : AppCompatActivity() {
+
+    lateinit var id : EditText
+    lateinit var name : EditText
+    lateinit var lastname : EditText
+    lateinit var height : EditText
+    lateinit var weight : EditText
+    lateinit var btn : Button
+    lateinit var databaseHelper: DatabaseHelper
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+
+        id = findViewById(R.id.EdtID)
+        name = findViewById(R.id.EdtName)
+        lastname = findViewById(R.id.EdtLastName)
+        height = findViewById(R.id.EdtHeight)
+        weight = findViewById(R.id.EdtWeight)
+        btn = findViewById(R.id.updateButton)
+        databaseHelper = DatabaseHelper(this)
+
+        btn.setOnClickListener {
+
+            updateFunction()
+
+        }
+    }
+
+    private fun updateFunction() {
+
+        val strId = id.text.toString()
+        val strName = name.text.toString()
+        val strLastName = lastname.text.toString()
+        val strHeight = height.text.toString()
+        val strWeight = weight.text.toString()
+
+        val result : Boolean = databaseHelper.updateData(strId,strName,strLastName,strHeight,strWeight)
+
+        when {
+            result -> Toast.makeText(applicationContext, "Data Updated Successfully...", Toast.LENGTH_LONG).show()
+            else -> Toast.makeText(applicationContext, "Failed to update data...", Toast.LENGTH_LONG).show()
+        }
+
+    }
+}

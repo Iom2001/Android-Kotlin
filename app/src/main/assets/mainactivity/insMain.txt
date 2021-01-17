@@ -1,0 +1,76 @@
+
+import android.content.Context
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import android.widget.EditText
+import android.widget.Toast
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    lateinit var fileText : EditText
+    var line : String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        fileText = findViewById(R.id.editText)
+
+    }
+
+    fun saveData( view : View)
+    {
+
+        try{
+            val fileOutputStream = openFileOutput("file.txt", Context.MODE_PRIVATE)
+            val outputStreamWriter = OutputStreamWriter(fileOutputStream)
+            outputStreamWriter.write(fileText.text.toString())
+            outputStreamWriter.close()
+            Toast.makeText(applicationContext,"Data Saved..", Toast.LENGTH_SHORT).show()
+            fileText.setText("")
+
+        }
+        catch (exp : Exception)
+        {
+            exp.printStackTrace()
+        }
+
+    }
+
+    fun readData( view : View)
+    {
+
+        try{
+
+            val fileInputStream = openFileInput("file.txt")
+            val inputStreamReader = InputStreamReader(fileInputStream)
+
+            val bufferReader = BufferedReader(inputStreamReader)
+            val stringBuilder = StringBuilder()
+
+
+            while ( {line = bufferReader.readLine(); line}() !=null )
+            {
+                stringBuilder.append(line)
+            }
+            fileInputStream.close()
+            inputStreamReader.close()
+            fileText.setText(stringBuilder.toString())
+
+            Toast.makeText(applicationContext,"Data Retrieved..", Toast.LENGTH_SHORT).show()
+
+
+        }catch(exp : Exception)
+        {
+            exp.printStackTrace()
+        }
+
+
+    }
+
+
+}

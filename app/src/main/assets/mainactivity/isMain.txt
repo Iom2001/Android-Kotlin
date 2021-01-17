@@ -1,0 +1,52 @@
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import android.widget.*
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    lateinit var imageSwitcher: ImageSwitcher
+    lateinit var btnNext : Button
+    lateinit var btnBack : Button
+    lateinit var arrImage : IntArray
+     var position : Int = -1
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        imageSwitcher = findViewById(R.id.imageSwitcher)
+        btnNext = findViewById(R.id.nextButton)
+        btnBack = findViewById(R.id.backButton)
+
+        arrImage = intArrayOf(R.drawable.a,R.drawable.swan,R.drawable.sqlite,R.drawable.notification,R.drawable.ttos)
+
+        imageSwitcher.setFactory {
+            val imageView = ImageView(applicationContext)
+            imageView.scaleType = ImageView.ScaleType.FIT_CENTER
+            imageView
+        }
+
+        btnBack.setOnClickListener {
+
+            if(position>0)
+            {
+                position -= 1
+                imageSwitcher.setImageResource(arrImage[position])
+            }
+
+        }
+
+        btnNext.setOnClickListener {
+           if(position<arrImage.size-1)
+           {
+               position += 1
+               imageSwitcher.setImageResource(arrImage[position])
+
+           }
+
+        }
+
+    }
+}

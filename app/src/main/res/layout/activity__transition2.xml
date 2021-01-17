@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5B041"
+    tools:context=".AndroidwithKotlin.ExplicitIntent.Activity_Transition.Activity_Transition2">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This is Second Activity"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:textSize="20dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go To First Activity"
+        android:id="@+id/buttonTransition2"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:padding="20dp"/>
+
+
+</LinearLayout>

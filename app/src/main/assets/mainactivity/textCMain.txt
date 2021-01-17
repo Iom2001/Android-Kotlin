@@ -1,0 +1,21 @@
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.TextClock
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val tClock =  findViewById<TextClock>(R.id.textClock) as TextClock
+
+        tClock.setOnClickListener {
+
+            Toast.makeText(this@com.example.androidkotlin.MainActivity,"This is TextClock",Toast.LENGTH_SHORT).show()
+
+        }
+    }
+}
+

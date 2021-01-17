@@ -1,0 +1,29 @@
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.Button
+import android.widget.ImageView
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val btn = findViewById<Button>(R.id.btn)
+
+        btn.setOnClickListener {
+
+            val img = findViewById<ImageView>(R.id.img)
+
+            val animation  = AnimationUtils.loadAnimation(applicationContext,R.anim.bounce)
+
+            img.startAnimation(animation)
+
+        }
+
+
+    }
+}

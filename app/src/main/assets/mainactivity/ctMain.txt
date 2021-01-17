@@ -1,0 +1,23 @@
+package com.androidexample.checkedtext
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.CheckedTextView
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    lateinit var checkedTextView: CheckedTextView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        checkedTextView = findViewById(R.id.checkedText)
+
+        checkedTextView.setOnClickListener {
+
+            checkedTextView.toggle()
+
+        }
+    }
+}

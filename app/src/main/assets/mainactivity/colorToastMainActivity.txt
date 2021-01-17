@@ -1,0 +1,34 @@
+import android.graphics.Color
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    lateinit var mButton: Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        mButton = findViewById(R.id.btn)
+
+        mButton.setOnClickListener {
+
+            val mToast = Toast.makeText(this@com.example.androidkotlin.MainActivity,"This is Toast..",Toast.LENGTH_LONG)
+
+            val view = mToast.view
+
+            view.setBackgroundResource(R.drawable.toast_background)
+
+            val mToastText = mToast.view.findViewById<TextView>(android.R.id.message)
+
+            mToastText.setTextColor(Color.parseColor("#FFFFFF"))
+
+            mToast.show()
+        }
+
+    }
+}

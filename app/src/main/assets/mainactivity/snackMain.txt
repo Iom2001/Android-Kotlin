@@ -1,0 +1,59 @@
+
+import android.graphics.Color
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.support.design.widget.CoordinatorLayout
+import android.support.design.widget.Snackbar
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    lateinit var mSimpleSnackBar : Button
+    lateinit var mCallbackSnackBar : Button
+    lateinit var mCustomSnackBar : Button
+    lateinit var coordinatorLayout: CoordinatorLayout
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        mSimpleSnackBar = findViewById(R.id.SimpleSnackbar)
+        mCallbackSnackBar = findViewById(R.id.CallBackSnackbar)
+        mCustomSnackBar = findViewById(R.id.CustomSnackbar)
+        coordinatorLayout = findViewById(R.id.coordinatorContainer)
+
+        mSimpleSnackBar.setOnClickListener {
+
+            val snackbar: Snackbar = Snackbar.make(coordinatorLayout,"This is Simple Snackbar....",Snackbar.LENGTH_LONG)
+            snackbar.show()
+
+        }
+
+        mCallbackSnackBar.setOnClickListener {
+
+            val snackbar1 : Snackbar = Snackbar.make(coordinatorLayout,"Deleted Message....",Snackbar.LENGTH_LONG)
+                 .setAction("UNDO", {
+                                val snackbar2 : Snackbar = Snackbar.make(coordinatorLayout,"Restored Message....",Snackbar.LENGTH_LONG)
+                                snackbar2.show()
+                               })
+            snackbar1.show()
+        }
+
+        mCustomSnackBar.setOnClickListener {
+
+            val snackbar: Snackbar = Snackbar.make(coordinatorLayout,"This is Custom Snackbar....",Snackbar.LENGTH_LONG)
+                                     .setAction("RETRY", {})
+            snackbar.setActionTextColor(Color.MAGENTA)
+
+            val snackbarView : View = snackbar.view
+            val txtView : TextView = snackbarView.findViewById(android.support.design.R.id.snackbar_text)
+            txtView.setTextColor(Color.RED)
+
+            snackbar.show()
+
+        }
+
+    }
+}

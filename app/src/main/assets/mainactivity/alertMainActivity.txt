@@ -1,0 +1,52 @@
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.support.v7.app.AlertDialog
+import android.widget.Button
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    lateinit var  mAlertButton : Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        mAlertButton = findViewById(R.id.btnAlert)
+
+        mAlertButton.setOnClickListener {
+
+            val mAlertDialogBuilder  = AlertDialog.Builder(this@com.example.androidkotlin.MainActivity)
+
+            mAlertDialogBuilder.setTitle("This is Title..")
+
+            mAlertDialogBuilder.setIcon(R.mipmap.ic_launcher)
+
+            mAlertDialogBuilder.setMessage("Are you sure do you want to exit ?")
+
+            mAlertDialogBuilder.setCancelable(false)
+
+            mAlertDialogBuilder.setPositiveButton("Yes") { _, _ ->
+
+                finish()
+
+            }
+
+            mAlertDialogBuilder.setNegativeButton("NO") {_, _ ->
+
+                Toast.makeText(this@com.example.androidkotlin.MainActivity,"Clicked No Button",Toast.LENGTH_LONG).show()
+            }
+
+            mAlertDialogBuilder.setNeutralButton("Cancel") {_, _ ->
+
+                Toast.makeText(this@com.example.androidkotlin.MainActivity,"Clicked Cancel Button",Toast.LENGTH_LONG).show()
+            }
+
+
+            val mAlertDialog = mAlertDialogBuilder.create()
+            mAlertDialog.show()
+
+        }
+
+    }
+}

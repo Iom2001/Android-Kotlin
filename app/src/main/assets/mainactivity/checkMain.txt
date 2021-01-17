@@ -1,0 +1,34 @@
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val click = findViewById<Button>(R.id.button) as Button
+        val checkOne =  findViewById<CheckBox>(R.id.kotlin) as CheckBox
+        val checkTwo = findViewById<CheckBox>(R.id.java) as CheckBox
+
+        click.setOnClickListener {
+            if( checkOne.isChecked == true && checkTwo.isChecked ==true )
+            {
+                Toast.makeText(this@com.example.androidkotlin.MainActivity,"Kotlin + Java",Toast.LENGTH_SHORT).show()
+            }else if (checkTwo.isChecked == true)
+            {
+                Toast.makeText(this@com.example.androidkotlin.MainActivity,"Java",Toast.LENGTH_SHORT).show()
+            }else if ( checkOne.isChecked )
+            {
+                Toast.makeText(this@com.example.androidkotlin.MainActivity,"Kotlin",Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                Toast.makeText(this@com.example.androidkotlin.MainActivity,"Nothing Selected",Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+}

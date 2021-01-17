@@ -1,0 +1,71 @@
+
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.speech.RecognizerIntent
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import java.util.*
+import kotlin.collections.ArrayList
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    private  val REQUEST_CODE_SPEECH_INPUT = 100
+    private lateinit var button: Button
+    private lateinit var resTextView: TextView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        button = findViewById<Button>(R.id.button)
+
+        resTextView = findViewById<TextView>(R.id.textView)
+
+        button.setOnClickListener {
+
+            SpeechFuction()
+
+
+        }
+    }
+
+    private fun SpeechFuction() {
+
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,Locale.getDefault())
+
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Say Something....")
+
+        try {
+            startActivityForResult(intent,REQUEST_CODE_SPEECH_INPUT)
+        }
+        catch (exp:ActivityNotFoundException)
+        {
+            Toast.makeText(applicationContext,"Speech Not Supported...",Toast.LENGTH_LONG).show()
+        }
+
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == REQUEST_CODE_SPEECH_INPUT)
+        {
+            if(resultCode == RESULT_OK || null != data)
+            {
+                val res : ArrayList<String> = data!!.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+
+                resTextView.text = res[0]
+            }
+        }
+
+    }
+}

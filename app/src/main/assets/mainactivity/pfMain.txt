@@ -1,0 +1,54 @@
+import android.content.Intent
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.text.TextUtils
+import android.view.View
+import android.widget.*
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val Name = findViewById<EditText>(R.id.name) as EditText
+        val Age = findViewById<EditText>(R.id.age) as EditText
+        val gender = findViewById<RadioGroup>(R.id.genderGroup) as RadioGroup
+        val  submitButton = findViewById<Button>(R.id.submit) as Button
+
+
+        submitButton.setOnClickListener(View.OnClickListener {
+            if (TextUtils.isEmpty(Name.text.toString())) {
+                Name.setError("Enter Name..")
+                return@OnClickListener
+            }
+            if (TextUtils.isEmpty(Age.text.toString())) {
+                Age.setError("Enter Age..")
+                return@OnClickListener
+            }
+            val intent = Intent(this@com.example.androidkotlin.MainActivity, Display::class.java)
+
+            val bundle = Bundle()
+
+            bundle.putString("name", Name.getText().toString())
+
+            bundle.putString("age", Age.getText().toString())
+
+            val gen_id = gender.getCheckedRadioButtonId()
+
+            if (gen_id == -1) {
+
+                Toast.makeText(this@com.example.androidkotlin.MainActivity, " Select Gender", Toast.LENGTH_SHORT).show()
+                return@OnClickListener
+            } else {
+                val radioButton = findViewById<RadioButton>(gen_id)
+                val genValue = radioButton.text.toString()
+                bundle.putString("gender", genValue)
+            }
+
+            intent.putExtras(bundle)
+
+            startActivity(intent)
+        })
+    }
+}

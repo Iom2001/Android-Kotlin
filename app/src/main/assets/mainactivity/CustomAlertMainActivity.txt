@@ -1,0 +1,66 @@
+
+import android.content.DialogInterface
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
+import android.view.View
+import android.widget.CheckBox
+import android.widget.CompoundButton
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+    }
+
+    fun showAlert(v : View)
+    {
+
+        val inflater = layoutInflater
+
+        val inflate_view = inflater.inflate(R.layout.custom_view,null)
+
+        val userNameEdt  = inflate_view.findViewById(R.id.userName) as EditText
+        val userPassWordEdt  = inflate_view.findViewById(R.id.password) as EditText
+
+        val checkBoxToggle = inflate_view.findViewById(R.id.showPassCheck) as CheckBox
+
+        checkBoxToggle.setOnCheckedChangeListener { buttonView, isCheck ->
+            if(isCheck)
+            {
+                userPassWordEdt.transformationMethod = PasswordTransformationMethod.getInstance()
+            }
+            else
+            {
+                userPassWordEdt.transformationMethod = null
+            }
+        }
+
+        val alertDialog  = AlertDialog.Builder(this)
+        alertDialog.setTitle("Enter Details.")
+        alertDialog.setView(inflate_view)  // this set custom XML in alertDialog
+        alertDialog.setCancelable(false)
+
+        alertDialog.setNegativeButton("Cancel") { dialog, which ->
+            Toast.makeText(this,"Cancel Button",Toast.LENGTH_LONG).show()
+        }
+
+        alertDialog.setPositiveButton("Done") { dialog, which->
+            val userName = userNameEdt.text.toString()
+            val userPass  = userPassWordEdt.text.toString()
+
+            Toast.makeText(this,"UserName : $userName Password : $userPass",Toast.LENGTH_LONG).show()
+        }
+
+        val dialog = alertDialog.create()
+        dialog.show()
+    }
+
+
+}

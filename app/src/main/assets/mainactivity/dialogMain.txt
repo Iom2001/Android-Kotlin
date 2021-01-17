@@ -1,0 +1,24 @@
+import android.app.ProgressDialog
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val prgDialog = ProgressDialog(this@com.example.androidkotlin.MainActivity)
+
+        val startBtn  = findViewById<Button>(R.id.start) as Button
+
+        startBtn.setOnClickListener {
+            prgDialog.setTitle("Progress Dialog")
+            prgDialog.setMessage("This is progress Dialog Box\n Click on the screen to dismiss")
+            prgDialog.show()
+        }
+
+    }
+}
+

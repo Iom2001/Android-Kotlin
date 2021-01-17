@@ -1,0 +1,73 @@
+import android.app.*
+import android.graphics.Color
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.util.TypedValue
+import android.view.Gravity
+import android.widget.Button
+import android.widget.DatePicker
+import android.widget.RelativeLayout
+import android.widget.TextView
+import java.util.*
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    lateinit var mCustomTitleDate : Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+
+        mCustomTitleDate = findViewById(R.id.dateBtn)
+
+        mCustomTitleDate.setOnClickListener {
+
+            val fragment : DialogFragment = CustomDatePickerFragment()
+
+            fragment.show(fragmentManager,"Date Picker")
+        }
+
+
+
+    }
+
+    class CustomDatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
+            val calendar : Calendar = Calendar.getInstance()
+
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(activity, AlertDialog.THEME_HOLO_LIGHT,this,year,month,day)
+
+            val textView = TextView(activity)
+
+            val layoutParams  = RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT)
+
+            textView.layoutParams = layoutParams
+            textView.setPadding(20,20,20,20)
+            textView.gravity = Gravity.CENTER
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,25f)
+            textView.setText("This is Custom Title")
+            textView.setTextColor(Color.parseColor("#ffffff"))
+            textView.setBackgroundColor(Color.parseColor("#5Ac18e"))
+
+            datePickerDialog.setCustomTitle(textView)
+
+
+
+            return datePickerDialog
+
+        }
+        override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+
+        }
+
+
+    }
+}

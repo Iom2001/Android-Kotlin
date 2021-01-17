@@ -1,0 +1,48 @@
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.graphics.BitmapFactory
+import android.media.RingtoneManager
+import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import androidx.core.app.NotificationCompat
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    lateinit var mInboxBtn : Button
+    val NOTIFICATION_ID = 2
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        mInboxBtn = findViewById(R.id.inboxNotificationBtn)
+
+        mInboxBtn.setOnClickListener {
+
+            val builder = NotificationCompat.Builder(this@com.example.androidkotlin.MainActivity)
+            builder.setSmallIcon(R.drawable.kotlin)
+                .setLargeIcon(BitmapFactory.decodeResource(resources,R.drawable.kotlin))
+                .setStyle(NotificationCompat.InboxStyle().addLine("Hi...").addLine("Are you there?").addLine("This is Kotlin Community.").addLine("Happy Coding :) ..").setBigContentTitle("4 New Messages for you").setSummaryText("Inbox"))
+                .setAutoCancel(true)
+
+            val path = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            builder.setSound(path)
+
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            {
+                val channelId = "NOTIFICATION_CHANNEL_ID"
+                val channel = NotificationChannel(channelId,"Title",NotificationManager.IMPORTANCE_DEFAULT)
+                notificationManager.createNotificationChannel(channel)
+                builder.setChannelId(channelId)
+            }
+
+            notificationManager.notify(NOTIFICATION_ID,builder.build())
+        }
+
+    }
+}

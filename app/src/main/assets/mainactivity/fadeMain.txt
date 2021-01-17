@@ -1,0 +1,38 @@
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.Button
+import android.widget.ImageView
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val btnFadeIn = findViewById<Button>(R.id.fadeIn) as Button
+        val btnFadeOut = findViewById<Button>(R.id.fadeOut) as Button
+
+        btnFadeIn.setOnClickListener {
+
+            val image = findViewById<ImageView>(R.id.imageView) as ImageView
+
+            val animation : Animation = AnimationUtils.loadAnimation(this@com.example.androidkotlin.MainActivity,R.anim.fade_in)
+
+            image.startAnimation(animation)
+        }
+
+        btnFadeOut.setOnClickListener {
+
+            val image = findViewById<ImageView>(R.id.imageView) as ImageView
+
+            val animation : Animation = AnimationUtils.loadAnimation(this@com.example.androidkotlin.MainActivity,R.anim.fade_out)
+
+            image.startAnimation(animation)
+        }
+
+    }
+
+}

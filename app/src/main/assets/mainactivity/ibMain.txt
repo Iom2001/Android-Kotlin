@@ -1,0 +1,22 @@
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.Toast
+
+class com.example.androidkotlin.MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val img1 = findViewById<ImageButton>(R.id.imageButton) as ImageButton
+
+        img1.setOnClickListener {
+
+            Toast.makeText(this@com.example.androidkotlin.MainActivity, "Image Button was Clicked",Toast.LENGTH_SHORT).show()
+
+        }
+
+
+    }
+}
